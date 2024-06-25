@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@ToString
+@ToString(exclude = {"nickName"})
 @EqualsAndHashCode(of = "id") // id가 pk 이므로 id 만 가지고 객체가 같은지 판단해라! 라는 코드, 여러개를 쓰려면 {"id", "name"}안에 묶기
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,12 +29,14 @@ public class Product {
     @Column(name = "prod_id")
     private Long id; // PK
 
+    @Setter
     @Column(name = "prod_nm", length = 30, nullable = false)
     private String name; // 상품명
 
     @Column(name = "price")
     private int price; // 상품 각격
 
+    @Setter
     @Column(nullable = false)
     // enum 을 타입으로 설정할때 기본적인 설정값 = EnumType.ORDINAL
     // 따라서 아래와 같은 코드를 써주어야 함
@@ -55,4 +57,16 @@ public class Product {
     public enum Category {
         FOOD, FASHION, ELECTRONIC
     }
+
+    // 컬럼 기본값 설정
+    @PrePersist
+    public void prePersist() {
+        if(this.price == 0) {
+            this.price = 10000;
+        }
+        if(this.category == null) {
+            this.category = Category.FOOD;
+        }
+    }
+
 }
