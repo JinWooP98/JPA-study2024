@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id") // id가 pk 이므로 id 만 가지고 객체가 같은지 판단해라! 라는 코드, 여러개를 쓰려면 {"id", "name"}안에 묶기
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 // 자동으로 table을 생성해줌..
 @Entity
 // 테이블 명 지정하기
