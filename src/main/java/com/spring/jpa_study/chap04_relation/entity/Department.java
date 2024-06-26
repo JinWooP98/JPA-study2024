@@ -39,7 +39,21 @@ public class Department {
     // mappedBy = 상대방이 무슨 이름으로 나랑 연결을 했는지
     // 즉 상대의 필드명
     // oneToMany에서는 fetch의 기본이 FetchType.LASY
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", orphanRemoval = true, cascade=CascadeType.ALL)
     // nullpointExeption을 피하기 위해 빈배열을 넣어준다.
     private List<Employee> employees = new ArrayList<>();
+
+    public void removeEmployee(Employee employee) {
+
+        this.employees.remove(employee);
+        employee.setDepartment(null);
+
+    }
+
+    public void addEmployee(Employee employee) {
+
+        this.employees.add(employee);
+        employee.setDepartment(this);
+
+    }
 }
