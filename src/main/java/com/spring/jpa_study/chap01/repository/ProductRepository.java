@@ -1,6 +1,6 @@
-package com.spring.jpa_study.chpa01.repository;
+package com.spring.jpa_study.chap01.repository;
 
-import com.spring.jpa_study.chpa01.entity.Product;
+import com.spring.jpa_study.chap01.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // JpaRepository를 상속한 후 첫번째제너릭엔 엔터티클래스 타입,

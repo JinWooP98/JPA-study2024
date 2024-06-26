@@ -13,9 +13,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// 테스트에선 transactional이 있어야 하며, 이를 안할경우 문제가 생길 수 있다.
+// 만약 데이터가 DB에 저장되는것을 보기 위해선 Rollback에 false를 붙여준다.
 @SpringBootTest
 @Transactional
-@Rollback
+@Rollback(false)
 class StudentRepositoryTest {
 
     @Autowired
@@ -117,5 +119,46 @@ class StudentRepositoryTest {
         System.out.println("\n\n\n\n");
         students.forEach(System.out::println);
         System.out.println("\n\n\n\n");
+    }
+
+    @Test
+    @DisplayName("JPQL로 학생 조회하기")
+    void jpqlTest() {
+        //given
+        String city="제주도";
+        //when
+        Student student = studentRepository.getByCityWithJPQL(city).orElseThrow(() -> new RuntimeException("학생이 없음!"));
+        //then
+        assertNotNull(student);
+        System.out.println("\n\n\n\n");
+        System.out.println("student = " + student);
+        System.out.println("\n\n\n\n");
+//        assertThrows(RuntimeException.class, () -> new RuntimeException());
+    }
+
+    @Test
+    @DisplayName("JPQL로 이름이 포함된 학생 조회하기")
+    void searchByName() {
+        //given
+        String containingName = "춘";
+        //when
+        List<Student> students = studentRepository.searchByNameWithJPQL(containingName);
+        //then
+        System.out.println("\n\n\n\n");
+        students.forEach(System.out::println);
+        System.out.println("\n\n\n\n");
+    }
+
+    @Test
+    @DisplayName("JPQL로 이름과 도시가 일치하는 학생 정보 삭제")
+    void deleteJpqlTest() {
+        //given
+        String name = "어피치";
+        String city = "제주도";
+        //when
+        studentRepository.deleteByNameAndCityWithJPQL(name, city);
+
+        //then
+        assertEquals(0, studentRepository.findByName(name).size());
     }
 }

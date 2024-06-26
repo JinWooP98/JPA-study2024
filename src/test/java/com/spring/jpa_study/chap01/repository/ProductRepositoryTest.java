@@ -1,6 +1,6 @@
-package com.spring.jpa_study.chpa01.repository;
+package com.spring.jpa_study.chap01.repository;
 
-import com.spring.jpa_study.chpa01.entity.Product;
+import com.spring.jpa_study.chap01.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,9 +10,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
-import static com.spring.jpa_study.chpa01.entity.Product.Category.*;
+import static com.spring.jpa_study.chap01.entity.Product.Category.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
