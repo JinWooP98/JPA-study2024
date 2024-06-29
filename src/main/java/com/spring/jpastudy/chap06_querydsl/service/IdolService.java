@@ -14,15 +14,18 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Transactional // JPA, QueryDsl 쓸 때 잊지말 것!
+@Transactional  // JPA , QueryDsl 쓸 때 잊지말 것!
 public class IdolService {
 
     private final IdolRepository idolRepository;
 
-    // 아이돌을 나이 순으로 정렬해서 조회
+    // 아이돌을 나이 순으로 내림차 정렬해서 조회
     public List<Idol> getIdols() {
-        List<Idol> idolList = idolRepository.findAllBySorted();
+//        List<Idol> idolList = idolRepository.findAll();
 
+//        List<Idol> idolList = idolRepository.findAllBySorted();
+
+        List<Idol> idolList = idolRepository.foundByGroupName();
 
 
 //        return idolList.stream()

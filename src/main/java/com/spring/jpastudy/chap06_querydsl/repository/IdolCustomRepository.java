@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IdolCustomRepository {
 
-    // JPA의 PAGE인터페이스 사용
+    // JPA의 PAGE인터페이스를 사용
     Page<Idol> foundAllByPaging(Pageable pageable);
 
     // 이름으로 오름차해서 전체조회
